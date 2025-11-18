@@ -174,8 +174,88 @@
     </div>
     <script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@3.5.4/dist/locomotive-scroll.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script>
+const scroll = new LocomotiveScroll({
+    el: document.querySelector('#main'),
+    smooth: true
+});
+
+function page4Animation() {
+    const elemContainer = document.querySelector("#elem-container");
+    const fixedImage = document.querySelector("#fixed-image");
+    const elems = document.querySelectorAll(".elem");
+
+    if (!elemContainer || !fixedImage || elems.length === 0) return;
+
+    elemContainer.addEventListener("mouseenter", () => {
+        fixedImage.style.display = "block";
+    });
+
+    elemContainer.addEventListener("mouseleave", () => {
+        fixedImage.style.display = "none";
+    });
+
+    elems.forEach(elem => {
+        elem.addEventListener("mouseenter", () => {
+            const img = elem.getAttribute("data-image");
+            fixedImage.style.backgroundImage = `url(${img})`;
+        });
+    });
+}
+
+function swiperAnimation() {
+    new Swiper(".mySwiper", {
+        slidesPerView: "auto",
+        centeredSlides: true,
+        spaceBetween: 100,
+    });
+}
+
+function menuAnimation() {
+    const menuBtn = document.querySelector("#menu-btn");
+    const fullScreenMenu = document.querySelector("#full-scr");
+    const navImg = document.querySelector("nav img");
+    const closeBtn = document.querySelector("#close-menu");
+
+    if (!menuBtn || !fullScreenMenu || !navImg || !closeBtn) return;
+
+    const openMenu = () => {
+        fullScreenMenu.style.top = "0";
+        navImg.style.opacity = "0";
+        document.body.style.overflow = "hidden";
+    };
+
+    const closeMenu = () => {
+        fullScreenMenu.style.top = "-100%";
+        navImg.style.opacity = "1";
+        document.body.style.overflow = "auto";
+    };
+
+    menuBtn.addEventListener("click", openMenu);
+    closeBtn.addEventListener("click", closeMenu);
+
+    document.querySelectorAll('#full-div1 a').forEach(link => {
+        link.addEventListener("click", closeMenu);
+    });
+}
+
+function loaderAnimation() {
+    const loader = document.querySelector("#loader");
+    if (!loader) return;
+
+    setTimeout(() => {
+        loader.style.top = "-100%";
+    }, 4200);
+}
+swiperAnimation();
+page4Animation();
+menuAnimation();
+loaderAnimation();
+
+    </script>
 </body>
 </html>
+
 
 
 
